@@ -13,7 +13,7 @@ export default function PokemonDetails({pokemon}: Props) {
     <ScrollView
       showsVerticalScrollIndicator={false}
       style={{
-        ...StyleSheet.absoluteFillObject,
+        ...StyleSheet.absoluteFill,
       }}>
       <View style={{...styles.container, marginTop: 370}}>
         <Text style={styles.title}>Types</Text>
