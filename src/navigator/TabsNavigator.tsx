@@ -1,4 +1,4 @@
-import {Platform} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {HomeStackNavigator} from './HomeStackNavigator';
@@ -10,9 +10,7 @@ const Tab = createBottomTabNavigator();
 export default function TabsNavigator() {
   return (
     <Tab.Navigator
-      sceneContainerStyle={{
-        backgroundColor: 'white',
-      }}
+      sceneContainerStyle={tabStyles.sceneContainer}
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: '#5856D6',
@@ -50,3 +48,9 @@ export default function TabsNavigator() {
     </Tab.Navigator>
   );
 }
+
+const tabStyles = StyleSheet.create({
+  sceneContainer: {
+    backgroundColor: 'white',
+  },
+});

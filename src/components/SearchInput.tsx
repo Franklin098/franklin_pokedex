@@ -2,7 +2,6 @@ import {
   Platform,
   StyleProp,
   StyleSheet,
-  Text,
   TextInput,
   View,
   ViewStyle,
@@ -34,10 +33,11 @@ export default function SearchInput({style, onDebounce}: Props) {
           autoCorrect={false}
           value={textValue}
           onChangeText={setTextValue}
-          style={{
-            ...styles.textInput,
-            top: Platform.OS === 'ios' ? 0 : 2,
-          }}></TextInput>
+          style={[
+            styles.textInput,
+            Platform.OS !== 'ios' && styles.textInputAndroid,
+          ]}
+        />
         <Icon name="search-outline" color="grey" size={25} />
       </View>
     </View>
@@ -65,5 +65,8 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     fontSize: 16,
+  },
+  textInputAndroid: {
+    top: 2,
   },
 });

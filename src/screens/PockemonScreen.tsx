@@ -24,7 +24,7 @@ export default function PockemonScreen({navigation, route}: Props) {
   const {isLoading, pokemon} = usePokemon(simplePokemon.id);
 
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.flex}>
       {/* Header Container */}
       <View style={{...styles.headerContainer, backgroundColor: color}}>
         <TouchableOpacity
@@ -56,6 +56,9 @@ export default function PockemonScreen({navigation, route}: Props) {
 }
 
 const styles = StyleSheet.create({
+  flex: {
+    flex: 1,
+  },
   headerContainer: {
     height: 370,
     zIndex: 999,

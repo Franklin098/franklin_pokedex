@@ -1,11 +1,10 @@
 import {
-  ImageErrorEventData,
   ImageStyle,
-  NativeSyntheticEvent,
   StyleProp,
   View,
   ActivityIndicator,
   Animated,
+  StyleSheet,
 } from 'react-native';
 import {useAnimation} from '../hooks/useAnimation';
 import React, {useState} from 'react';
@@ -24,20 +23,15 @@ export const FadeInImage = ({uri, style = {}}: Props) => {
     fadeIn();
   };
 
-  const onError = (err: NativeSyntheticEvent<ImageErrorEventData>) => {
+  const onError = () => {
     setIsLoading(false);
   };
 
   return (
-    <View
-      style={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        ...(style as any),
-      }}>
+    <View style={[styles.container, style]}>
       {isLoading && (
         <ActivityIndicator
-          style={{position: 'absolute'}}
+          style={styles.loader}
           color="grey"
           size={30}
         />
@@ -46,8 +40,18 @@ export const FadeInImage = ({uri, style = {}}: Props) => {
         source={{uri}}
         onError={onError}
         onLoad={finishLoading}
-        style={{...(style as any), opacity}}
+        style={[style, {opacity}]}
       />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loader: {
+    position: 'absolute',
+  },
+});

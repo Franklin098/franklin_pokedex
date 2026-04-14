@@ -44,7 +44,8 @@ export default function PokemonCard({pokemon}: Props) {
             setBgColor(result.dominant || 'grey');
             break;
           case 'ios':
-            setBgColor(result.background || 'gret');
+            setBgColor(result.background || 'grey');
+            break;
           default:
             break;
         }
@@ -53,7 +54,7 @@ export default function PokemonCard({pokemon}: Props) {
     return () => {
       isMounted.current = false;
     };
-  }, []);
+  }, [pokemon.picture]);
 
   const goToPokemonCard = () => {
     navigation.navigate('PokemonScreen', {
