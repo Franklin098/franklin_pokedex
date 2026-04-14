@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  Dimensions,
-} from 'react-native';
+import {StyleSheet, Text, FlatList} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import SearchInput from '../components/SearchInput';
@@ -13,8 +7,6 @@ import PokemonCard from '../components/PokemonCard';
 import {styles as globalStyles} from '../theme/appTheme';
 import Loading from '../components/Loading';
 import {SimplePokemon} from '../interfaces/PokemonInterfaces';
-
-const screenWidth = Dimensions.get('window').width;
 
 export default function SearchScreen() {
   const {isFetching, simplePokemonList} = usePokemonSearch();

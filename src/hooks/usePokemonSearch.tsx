@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {pokemonApi} from '../api/pokemonApi';
+import {pokemonApi, BASE_IMAGE_URL} from '../api/pokemonApi';
 import {
   PokemonPaginatedResponse,
   SimplePokemon,
@@ -7,11 +7,8 @@ import {
 } from '../interfaces/PokemonInterfaces';
 
 export const usePokemonSearch = () => {
-  // Poke API doesn't provide search queries,
-  // so non optimal solution is implemented here fetching 1200 names
-  const pokeAPIUrl = 'https://pokeapi.co/api/v2/pokemon?limit=1200';
-  const basePictureUrl =
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork';
+  // PokeAPI doesn't provide search queries,
+  // so we fetch all names and filter client-side
 
   const [simplePokemonList, setSimplePokemonList] = useState<SimplePokemon[]>(
     [],
@@ -20,7 +17,9 @@ export const usePokemonSearch = () => {
 
   const loadPokemons = async () => {
     setIsFetching(true);
-    const resp = await pokemonApi.get<PokemonPaginatedResponse>(pokeAPIUrl);
+    const resp = await pokemonApi.get<PokemonPaginatedResponse>(
+      '/pokemon?limit=1200',
+    );
     mapPokemonList(resp.data.results);
     setIsFetching(false);
   };
@@ -29,7 +28,7 @@ export const usePokemonSearch = () => {
     const newPokemonList: SimplePokemon[] = pokemonList.map(({name, url}) => {
       const urlParts = url.split('/');
       const id = urlParts[urlParts.length - 2];
-      const picture = `${basePictureUrl}/${id}.png`;
+      const picture = `${BASE_IMAGE_URL}/${id}.png`;
       return {
         id,
         picture,
